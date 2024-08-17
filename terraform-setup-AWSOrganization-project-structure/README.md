@@ -1,5 +1,6 @@
 
-# Setup AWS Organization Terraform Configuration Script
+# AWS Organization Terraform Configuration Script
+## Written and maintained by Obsidian Cloud
 
 ## Overview
 
