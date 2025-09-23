@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  solana-dev:
+    build: .
+    container_name: solana-blockchain-dev
+    image: solana-dev:latest
+    volumes:
+      # Mount your local development directories
+      - ./projects:/workspace/projects
+      - ./solana-projects:/workspace/solana-projects
+      - ./serverless-projects:/workspace/serverless-projects
+      - ./terraform-projects:/workspace/terraform-projects
+      # Mount AWS credentials (optional - for local development)
+      - ~/.aws:/root/.aws:ro
+      # Mount SSH keys for git operations
+      - ~/.ssh:/root/.ssh:ro
+      # Mount git config
+      - ~/.gitconfig:/root/.gitconfig:ro
+      # Docker socket for Docker-in-Docker scenarios
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      # Common development ports
+      - "3000:3000"   # React/Next.js dev server
+      - "8000:8000"   # General web server
+      - "8080:8080"   # Alternative web server
+      - "8545:8545"   # Ethereum/local blockchain
+      - "8899:8899"   # Solana localnet
+      - "8900:8900"   # Solana test validator
+      - "4566:4566"   # LocalStack (AWS local)
+    environment:
+      # Set timezone
+      - TZ=UTC
+      # Solana configuration
+      - SOLANA_URL=https://api.devnet.solana.com
+      - SOLANA_WS_URL=wss://api.devnet.solana.com
+      # AWS configuration (override with your values)
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_PROFILE=default
+      # Node.js configuration
+      - NODE_ENV=development
+      # Rust configuration
+      - RUST_LOG=info
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    networks:
+      - solana-dev-network
+
+  # Optional: LocalStack for local AWS development
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack-aws
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,lambda,apigateway,dynamodb,cloudformation,sts,iam
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - LAMBDA_EXECUTOR=docker
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - localstack-data:/tmp/localstack
+    networks:
+      - solana-dev-network
+
+  # Optional: Redis for caching/session storage
+  redis:
+    image: redis:7-alpine
+    container_name: redis-cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - solana-dev-network
+
+  # Optional: PostgreSQL for database development
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=development
+      - POSTGRES_USER=developer
+      - POSTGRES_PASSWORD=devpassword
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - solana-dev-network
+
+networks:
+  solana-dev-network:
+    driver: bridge
+
+volumes:
+  localstack-data:
+  redis-data:
+  postgres-data:
