@@ -1,42 +1,82 @@
 # Solana Blockchain Development Environment
 
+<div align="center">
+
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)
+![Solana](https://img.shields.io/badge/Solana-9945FF?style=for-the-badge&logo=solana&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=for-the-badge&logo=terraform&logoColor=white)
+![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+
+</div>
+
 A comprehensive Docker-based development environment for Solana blockchain development with Rust, AWS Serverless Framework, and Terraform infrastructure management.
 
 ## 🚀 Overview
 
 This development environment provides a complete, containerized setup for building Solana applications, smart contracts, and managing cloud infrastructure. It eliminates the need to install and configure multiple development tools locally, ensuring consistency across different development machines.
 
+### 🏗️ Technology Stack
+
+```mermaid
+graph TB
+    A[🐳 Docker Container] --> B[🦀 Rust Ecosystem]
+    A --> C[☁️ AWS Tools]
+    A --> D[🌐 Web3 Stack]
+    A --> E[🏗️ Infrastructure]
+    
+    B --> B1[Rust 1.75.0]
+    B --> B2[Cargo & Clippy]
+    B --> B3[WASM Target]
+    
+    C --> C1[AWS CLI v2]
+    C --> C2[Serverless Framework]
+    C --> C3[LocalStack]
+    
+    D --> D1[Solana CLI]
+    D --> D2[Anchor Framework]
+    D --> D3[Web3.js]
+    D --> D4[SPL Tokens]
+    
+    E --> E1[Terraform]
+    E --> E2[Terragrunt]
+    E --> E3[Docker-in-Docker]
+```
+
 ## 🛠️ What's Included
 
 ### Core Blockchain Development
-- **Rust** (v1.75.0) with rustfmt, clippy, and WASM target support
-- **Solana CLI** (v1.17.15) with full blockchain development capabilities
-- **Anchor Framework** (latest) for Solana smart contract development
-- **SPL Token CLI** for Solana token operations
-- **Solana Web3.js** and Project Serum Anchor libraries
+- ![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=flat-square&logo=rust&logoColor=white) **Rust** (v1.75.0) with rustfmt, clippy, and WASM target support
+- ![Solana](https://img.shields.io/badge/Solana-9945FF?style=flat-square&logo=solana&logoColor=white) **Solana CLI** (v1.17.15) with full blockchain development capabilities
+- ⚓ **Anchor Framework** (latest) for Solana smart contract development
+- 🪙 **SPL Token CLI** for Solana token operations
+- ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat-square&logo=javascript&logoColor=%23F7DF1E) **Solana Web3.js** and Project Serum Anchor libraries
 
 ### Cloud & Infrastructure Tools
-- **AWS CLI** (v2.15.17) for cloud operations
-- **AWS Serverless Framework** (v3) with common plugins:
+- ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=flat-square&logo=amazon-aws&logoColor=white) **AWS CLI** (v2.15.17) for cloud operations
+- ⚡ **AWS Serverless Framework** (v3) with common plugins:
   - serverless-webpack
   - serverless-offline
   - serverless-dotenv-plugin
   - serverless-prune-plugin
-- **Terraform** (v1.6.6) for Infrastructure as Code
-- **Terragrunt** for advanced Terraform workflows
+- ![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=flat-square&logo=terraform&logoColor=white) **Terraform** (v1.6.6) for Infrastructure as Code
+- 🏗️ **Terragrunt** for advanced Terraform workflows
 
 ### Development Environment
-- **Node.js** (v20.x) with npm and Yarn
-- **TypeScript** with ESLint and Prettier
-- **Python 3** with boto3, pytest, and development tools
-- **Docker CLI** for containerized workflows
-- **GitHub CLI** for repository management
-- **Development utilities**: git, vim, nano, htop, tree, jq
+- ![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=flat-square&logo=node.js&logoColor=white) **Node.js** (v20.x) with npm and Yarn
+- ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat-square&logo=typescript&logoColor=white) **TypeScript** with ESLint and Prettier
+- ![Python](https://img.shields.io/badge/python-3670A0?style=flat-square&logo=python&logoColor=ffdd54) **Python 3** with boto3, pytest, and development tools
+- ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white) **Docker CLI** for containerized workflows
+- ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=flat-square&logo=github&logoColor=white) **GitHub CLI** for repository management
+- 🛠️ **Development utilities**: git, vim, nano, htop, tree, jq
 
 ### Optional Services (via docker-compose)
-- **LocalStack** for local AWS service emulation
-- **Redis** for caching and session storage
-- **PostgreSQL** for database development
+- ☁️ **LocalStack** for local AWS service emulation
+- ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=flat-square&logo=redis&logoColor=white) **Redis** for caching and session storage
+- ![PostgreSQL](https://img.shields.io/badge/postgres-%23316192.svg?style=flat-square&logo=postgresql&logoColor=white) **PostgreSQL** for database development
 
 ## 📋 Prerequisites
 
