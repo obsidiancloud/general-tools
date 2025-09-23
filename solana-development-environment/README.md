@@ -8,6 +8,7 @@
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=for-the-badge&logo=terraform&logoColor=white)
 ![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
@@ -62,16 +63,22 @@ graph TB
   - serverless-offline
   - serverless-dotenv-plugin
   - serverless-prune-plugin
+- 🚀 **SST (Serverless Stack)** for modern full-stack applications
 - ![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=flat-square&logo=terraform&logoColor=white) **Terraform** (v1.6.6) for Infrastructure as Code
 - 🏗️ **Terragrunt** for advanced Terraform workflows
 
 ### Development Environment
 - ![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=flat-square&logo=node.js&logoColor=white) **Node.js** (v20.x) with npm and Yarn
+- ![Next.js](https://img.shields.io/badge/Next-black?style=flat-square&logo=next.js&logoColor=white) **Next.js** with create-next-app and bundle analyzer
 - ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat-square&logo=typescript&logoColor=white) **TypeScript** with ESLint and Prettier
+- ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat-square&logo=tailwind-css&logoColor=white) **Tailwind CSS** with PostCSS and Autoprefixer
+- ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=flat-square&logo=vite&logoColor=white) **Vite** for fast development builds
+- ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=flat-square&logo=webpack&logoColor=black) **Webpack** for advanced bundling
 - ![Python](https://img.shields.io/badge/python-3670A0?style=flat-square&logo=python&logoColor=ffdd54) **Python 3** with boto3, pytest, and development tools
 - ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white) **Docker CLI** for containerized workflows
 - ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=flat-square&logo=github&logoColor=white) **GitHub CLI** for repository management
-- 🛠️ **Development utilities**: git, vim, nano, htop, tree, jq
+- ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=flat-square&logo=git&logoColor=white) **Git** with Git LFS support
+- 🛠️ **Development utilities**: vim, nano, htop, tree, jq, openssh-client
 
 ### Optional Services (via docker-compose)
 - ☁️ **LocalStack** for local AWS service emulation
@@ -175,6 +182,7 @@ anchor test
 
 ### AWS Serverless Development
 
+#### Traditional Serverless Framework
 ```bash
 # Create a new serverless project
 cd /workspace/serverless-projects
@@ -189,6 +197,23 @@ serverless deploy
 
 # Local development with offline plugin
 serverless offline
+```
+
+#### SST (Serverless Stack) for Modern Apps
+```bash
+# Create a new SST project with Next.js
+cd /workspace/serverless-projects
+npx create-sst@latest my-sst-app
+cd my-sst-app
+
+# Start development environment
+npm run dev
+
+# Deploy to AWS
+npm run deploy
+
+# Create a Next.js + Solana integration
+npx create-sst@latest solana-nextjs-app --template=nextjs
 ```
 
 ### Terraform Infrastructure Management

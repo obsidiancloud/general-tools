@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     wget \
     git \
+    git-lfs \
     build-essential \
     pkg-config \
     libudev-dev \
@@ -26,6 +27,7 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     unzip \
+    zip \
     jq \
     vim \
     nano \
@@ -36,6 +38,7 @@ RUN apt-get update && apt-get install -y \
     lsb-release \
     software-properties-common \
     apt-transport-https \
+    openssh-client \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Rust
@@ -45,6 +48,10 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 # Install additional Rust components
 RUN rustup component add rustfmt clippy
 RUN rustup target add wasm32-unknown-unknown
+
+# Install additional Rust tools for Solana development
+RUN cargo install cargo-expand cargo-edit wasm-pack
+RUN cargo install --git https://github.com/solana-labs/solana solana-install-init
 
 # Install Node.js and npm
 RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION} | bash - \
@@ -68,6 +75,9 @@ RUN npm install -g \
     serverless-offline \
     serverless-dotenv-plugin \
     serverless-prune-plugin
+
+# Install SST (Serverless Stack) for Next.js and modern web apps
+RUN npm install -g sst @serverless-stack/cli @serverless-stack/resources
 
 # Install Terraform
 RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
@@ -94,6 +104,12 @@ RUN cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
 RUN cargo install spl-token-cli
 RUN npm install -g @solana/web3.js @project-serum/anchor
 
+# Install Metaplex CLI for NFT development
+RUN npm install -g @metaplex-foundation/js @metaplex-foundation/mpl-token-metadata
+
+# Install Solana development utilities
+RUN npm install -g @solana/spl-token @solana/buffer-layout
+
 # Install Docker CLI (for Docker-in-Docker scenarios)
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
     && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
@@ -109,6 +125,19 @@ RUN npm install -g \
     prettier \
     @typescript-eslint/parser \
     @typescript-eslint/eslint-plugin
+
+# Install Next.js and modern web development tools
+RUN npm install -g \
+    next \
+    create-next-app \
+    @next/bundle-analyzer \
+    tailwindcss \
+    postcss \
+    autoprefixer \
+    vite \
+    create-vite \
+    webpack \
+    webpack-cli
 
 # Install Python packages for AWS and general development
 RUN pip3 install \
@@ -127,17 +156,35 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | d
     && apt-get install gh -y \
     && rm -rf /var/lib/apt/lists/*
 
+# Create a non-root user for security
+RUN groupadd -r solana && useradd -r -g solana -m -d /home/solana -s /bin/bash solana
+RUN usermod -aG docker solana
+
 # Create development directories
 RUN mkdir -p /workspace/solana-projects \
     && mkdir -p /workspace/serverless-projects \
-    && mkdir -p /workspace/terraform-projects
+    && mkdir -p /workspace/terraform-projects \
+    && mkdir -p /workspace/examples \
+    && mkdir -p /home/solana/.solana \
+    && chown -R solana:solana /workspace /home/solana
 
-# Set up shell environment
+# Set up shell environment for root and solana user
 RUN echo 'alias ll="ls -la"' >> ~/.bashrc \
     && echo 'alias la="ls -la"' >> ~/.bashrc \
     && echo 'alias ..="cd .."' >> ~/.bashrc \
     && echo 'alias ...="cd ../.."' >> ~/.bashrc \
-    && echo 'export EDITOR=nano' >> ~/.bashrc
+    && echo 'export EDITOR=nano' >> ~/.bashrc \
+    && echo 'export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"' >> ~/.bashrc
+
+# Set up environment for solana user
+RUN echo 'alias ll="ls -la"' >> /home/solana/.bashrc \
+    && echo 'alias la="ls -la"' >> /home/solana/.bashrc \
+    && echo 'alias ..="cd .."' >> /home/solana/.bashrc \
+    && echo 'alias ...="cd ../.."' >> /home/solana/.bashrc \
+    && echo 'export EDITOR=nano' >> /home/solana/.bashrc \
+    && echo 'export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"' >> /home/solana/.bashrc \
+    && echo 'export PATH="/root/.cargo/bin:$PATH"' >> /home/solana/.bashrc \
+    && chown solana:solana /home/solana/.bashrc
 
 # Create a startup script
 RUN echo '#!/bin/bash\n\
@@ -147,9 +194,12 @@ echo "Solana CLI version: $(solana --version)"\n\
 echo "Node.js version: $(node --version)"\n\
 echo "npm version: $(npm --version)"\n\
 echo "Serverless version: $(serverless --version)"\n\
+echo "SST version: $(sst --version 2>/dev/null || echo \"not available\")"\n\
+echo "Next.js version: $(next --version 2>/dev/null || echo \"not available\")"\n\
 echo "Terraform version: $(terraform --version | head -n1)"\n\
 echo "AWS CLI version: $(aws --version)"\n\
 echo "Anchor version: $(anchor --version)"\n\
+echo "Git version: $(git --version)"\n\
 echo ""\n\
 echo "Available directories:"\n\
 echo "  /workspace/solana-projects - For Solana/Rust projects"\n\

@@ -1,0 +1,39 @@
+# Solana CLI Configuration Template
+# This file provides common Solana configurations for different networks
+
+# Default configuration for development
+json_rpc_url: "https://api.devnet.solana.com"
+websocket_url: "wss://api.devnet.solana.com/"
+keypair_path: "/home/solana/.config/solana/id.json"
+address_labels:
+  "11111111111111111111111111111111": "System Program"
+  "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA": "Token Program"
+  "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL": "Associated Token Program"
+commitment: "confirmed"
+
+# Network configurations
+networks:
+  devnet:
+    json_rpc_url: "https://api.devnet.solana.com"
+    websocket_url: "wss://api.devnet.solana.com/"
+    
+  testnet:
+    json_rpc_url: "https://api.testnet.solana.com"
+    websocket_url: "wss://api.testnet.solana.com/"
+    
+  mainnet-beta:
+    json_rpc_url: "https://api.mainnet-beta.solana.com"
+    websocket_url: "wss://api.mainnet-beta.solana.com/"
+    
+  localhost:
+    json_rpc_url: "http://127.0.0.1:8899"
+    websocket_url: "ws://127.0.0.1:8900"
+
+# Common program addresses
+programs:
+  system: "11111111111111111111111111111111"
+  token: "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+  associated_token: "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+  rent: "SysvarRent111111111111111111111111111111111"
+  clock: "SysvarC1ock11111111111111111111111111111111"
+  stake_history: "SysvarStakeHistory1111111111111111111111111"

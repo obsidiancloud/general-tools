@@ -1,0 +1,49 @@
+service: solana-api-example
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ${opt:region, 'us-east-1'}
+  stage: ${opt:stage, 'dev'}
+  environment:
+    SOLANA_NETWORK: ${env:SOLANA_NETWORK, 'devnet'}
+    SOLANA_RPC_URL: ${env:SOLANA_RPC_URL, 'https://api.devnet.solana.com'}
+
+functions:
+  getBalance:
+    handler: src/handlers/balance.getBalance
+    events:
+      - http:
+          path: /balance/{address}
+          method: get
+          cors: true
+
+  getTransaction:
+    handler: src/handlers/transaction.getTransaction
+    events:
+      - http:
+          path: /transaction/{signature}
+          method: get
+          cors: true
+
+  createWallet:
+    handler: src/handlers/wallet.createWallet
+    events:
+      - http:
+          path: /wallet
+          method: post
+          cors: true
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+custom:
+  webpack:
+    webpackConfig: webpack.config.js
+    includeModules: true
+  dotenv:
+    path: .env

@@ -5,20 +5,27 @@ services:
     build: .
     container_name: solana-blockchain-dev
     image: solana-dev:latest
+    # Run as non-root user for security
+    user: solana
     volumes:
       # Mount your local development directories
       - ./projects:/workspace/projects
       - ./solana-projects:/workspace/solana-projects
       - ./serverless-projects:/workspace/serverless-projects
       - ./terraform-projects:/workspace/terraform-projects
+      # Mount configuration files
+      - ./solana-config.yml:/home/solana/.config/solana/cli/config.yml:ro
       # Mount AWS credentials (optional - for local development)
-      - ~/.aws:/root/.aws:ro
+      - ~/.aws:/home/solana/.aws:ro
       # Mount SSH keys for git operations
-      - ~/.ssh:/root/.ssh:ro
+      - ~/.ssh:/home/solana/.ssh:ro
       # Mount git config
-      - ~/.gitconfig:/root/.gitconfig:ro
+      - ~/.gitconfig:/home/solana/.gitconfig:ro
       # Docker socket for Docker-in-Docker scenarios
       - /var/run/docker.sock:/var/run/docker.sock
+      # Persistent Solana configuration and keys
+      - solana-config:/home/solana/.config
+      - solana-keys:/home/solana/.solana
     ports:
       # Common development ports
       - "3000:3000"   # React/Next.js dev server
@@ -41,6 +48,10 @@ services:
       - NODE_ENV=development
       # Rust configuration
       - RUST_LOG=info
+      # Security
+      - CONTAINER_USER=solana
+    env_file:
+      - .env
     working_dir: /workspace
     stdin_open: true
     tty: true
@@ -100,3 +111,5 @@ volumes:
   localstack-data:
   redis-data:
   postgres-data:
+  solana-config:
+  solana-keys:
