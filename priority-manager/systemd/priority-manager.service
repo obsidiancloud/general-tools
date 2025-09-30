@@ -1,0 +1,25 @@
+[Unit]
+Description=Priority Manager for Critical Applications
+Documentation=man:renice(1) man:ionice(1)
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/priority-manager.sh monitor
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Resource limits - ensure the manager itself is lightweight
+Nice=-10
+IOSchedulingClass=realtime
+IOSchedulingPriority=0
+OOMScoreAdjust=-500
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target
