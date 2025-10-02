@@ -21,50 +21,25 @@ This directory contains **comprehensive, production-grade cheatsheets** for Prin
 
 ---
 
-## Available Cheatsheets (23 Total) ✅
+## 📚 Cheatsheet Collection
 
-### 🏗️ Priority 1: Core Infrastructure (6/6)
-- **[Git & GitHub CLI](git-github-cli-cheatsheet.md)** - Version control mastery and GitHub operations
-- **[Kubernetes (kubectl)](kubernetes-kubectl-cheatsheet.md)** - Container orchestration with EKS integration
-- **[Docker & Docker Compose](docker-docker-compose-cheatsheet.md)** - Containerization and multi-container apps
-- **[Terraform](terraform-cheatsheet.md)** - Infrastructure as Code
-- **[AWS CLI](aws-cli-cheatsheet.md)** - AWS command-line operations
-- **[Ansible](ansible-cheatsheet.md)** - Configuration management and automation
+**All cheatsheets are now organized in the [obsidian-cheatsheets](./obsidian-cheatsheets/) directory.**
 
-### 📊 Priority 2: Observability & Monitoring (3/3)
-- **[Prometheus & PromQL](prometheus-promql-cheatsheet.md)** - Metrics collection and querying
-- **[Grafana](grafana-cheatsheet.md)** - Metrics visualization and dashboards
-- **[ELK Stack](elk-stack-cheatsheet.md)** - Elasticsearch, Logstash, Kibana for log management
+👉 **[Browse the Complete Collection](./obsidian-cheatsheets/README.md)** 👈
 
-### 🔒 Priority 3: Networking & Security (3/3)
-- **[SSL/TLS & OpenSSL](ssl-tls-openssl-cheatsheet.md)** - Certificate management and encryption
-- **[Nginx](nginx-cheatsheet.md)** - Web server and reverse proxy
-- **[iptables & Firewall](iptables-firewall-cheatsheet.md)** - Linux firewall management
+### Quick Access by Category
 
-### 🚀 Priority 4: CI/CD & Automation (3/3)
-- **[Jenkins](jenkins-cheatsheet.md)** - CI/CD pipelines and automation
-- **[GitLab CI & GitHub Actions](gitlab-ci-github-actions-cheatsheet.md)** - Git-based CI/CD platforms
+- 🏗️ **[Core Infrastructure](./obsidian-cheatsheets/core-infrastructure/)** - Git, Kubernetes, Docker, Terraform, AWS CLI, Ansible
+- 📊 **[Observability & Monitoring](./obsidian-cheatsheets/observability-monitoring/)** - Prometheus, Grafana, ELK Stack
+- 🔒 **[Networking & Security](./obsidian-cheatsheets/networking-security/)** - SSL/TLS, Nginx, iptables
+- 🚀 **[CI/CD & Automation](./obsidian-cheatsheets/cicd-automation/)** - Jenkins, GitLab CI, GitHub Actions
+- 🖥️ **[System Administration](./obsidian-cheatsheets/system-administration/)** - systemd, Bash, Linux Commands
+- 💾 **[Databases & Caching](./obsidian-cheatsheets/databases-caching/)** - PostgreSQL, Redis, MySQL, Supabase, Neo4j, Vector DBs
+- ⚡ **[Modern Tools](./obsidian-cheatsheets/modern-tools/)** - jq/yq, Helm/ArgoCD, Vim/Tmux
+- ☁️ **[Cloud & Platform](./obsidian-cheatsheets/cloud-platform/)** - AWS Services, GCP, Azure
+- 🤖 **[AI/ML & Data Science](./obsidian-cheatsheets/ai-ml-data-science/)** - PyTorch, TensorFlow, scikit-learn, Hugging Face
 
-### 🖥️ Priority 5: System Administration (3/3)
-- **[systemd](systemd-cheatsheet.md)** - Service management and init system
-- **[Bash Scripting](bash-scripting-cheatsheet.md)** - Shell scripting mastery
-- **[Linux Commands](linux-commands-cheatsheet.md)** - Essential Linux CLI commands
-
-### 💾 Priority 6: Databases & Caching (2/2)
-- **[PostgreSQL, Redis & MySQL](postgresql-redis-mysql-cheatsheet.md)** - Traditional databases and caching
-- **[Modern Databases](modern-databases-cheatsheet.md)** - Supabase, Graph DBs (Neo4j), Vector DBs (Pinecone, Weaviate, Qdrant)
-
-### ⚡ Priority 7: Modern Tools (3/3)
-- **[jq & yq](jq-yq-cheatsheet.md)** - JSON and YAML processing
-- **[Helm & ArgoCD](helm-argocd-cheatsheet.md)** - Kubernetes package management and GitOps
-- **[Vim & Tmux](vim-tmux-cheatsheet.md)** - Terminal editor and multiplexer
-
-### ☁️ Priority 8: Cloud & Platform (2/2)
-- **[AWS Services](aws-services-cheatsheet.md)** - Comprehensive AWS services reference
-- **[GCP & Azure](gcp-azure-cheatsheet.md)** - Google Cloud and Microsoft Azure essentials
-
-### 🤖 Priority 9: AI/ML & Data Science (1/1)
-- **[AI/ML Frameworks](ai-ml-frameworks-cheatsheet.md)** - PyTorch, TensorFlow, scikit-learn, Hugging Face, MLflow, W&B
+**Total**: 23 comprehensive cheatsheets across 9 categories
 
 ---
 
@@ -221,6 +196,9 @@ This project is licensed under the [GPL-3.0 License](https://github.com/obsidian
 
 ## Quick Links
 
+- **[ObsidianCloud Cheatsheets](./obsidian-cheatsheets/README.md)** - Browse the complete collection
+- **[Cheatsheet Index](./obsidian-cheatsheets/INDEX.md)** - Quick navigation table
+- **[Completion Summary](./obsidian-cheatsheets/COMPLETION_SUMMARY.md)** - Project details
 - **[Generation Prompt](CHEATSHEET_GENERATION_PROMPT.md)** - How to create new cheatsheets
 - **[Progress Tracker](PROGRESS.md)** - What's complete and what's next
 - **[Parent Repo README](../README.md)** - Main general-tools documentation
